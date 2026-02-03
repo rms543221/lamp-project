@@ -2,21 +2,28 @@
 <head>
      <!-- REGISTER PAGE -->
     <title>Register - COP4331 LAMP Demo</title>
-    <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/css/styles2.css" rel="stylesheet">
     <script src="js/code.js"></script>
 </head>
-<body class="center-page">
-    <h1>Mini App Contacts Manager</h1>
-    <div class="container">
-        <h2>Register</h2>
-        <input type="text" id="regFirstName" placeholder="First Name">
-        <input type="text" id="regLastName" placeholder="Last Name">
-        <input type="text" id="regLogin" placeholder="Username">
-        <input type="password" id="regPassword" placeholder="Password">
-        <button onclick="doRegister();">Register</button>
-        <div class="message" id="registerResult"></div>
-        <p>Already have an account? <a href="index.html">Login here</a></p>
+<body>
+    <div class = "page">
+        <h1>Contact Manager</h1>
+        <div class="card">
+
+            <h2>Register</h2>
+
+            <input type="text" id="regFirstName" placeholder="First Name">
+            <input type="text" id="regLastName" placeholder="Last Name">
+            <input type="text" id="regLogin" placeholder="Username">
+            <input type="password" id="regPassword" placeholder="Password">
+
+            <button onclick="doRegister();">Register</button>
+
+            <div class="small-text" id="registerResult"></div>
+            <p>Already have an account? <a href="index.html">Login here</a></p>
+
+        </div>
     </div>
 </body>
 </html>
