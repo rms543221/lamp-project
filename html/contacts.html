@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>COP 4331 Contacts</title>
+    <title>Contact Manager</title>
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="js/code.js"></script>
 </head>
 <body class="contacts-page" onload="readCookie();">
 
-    <h1>Welcome to Mini App Contact Manager! <span id="userName"></span>!</h1>
-    <button class="buttons logoutBtn" onclick="doLogout();">Logout</button>
-
-    <hr>
+    <h1 class="title">Contact Manager</h1>
 
     <!-- ADD CONTACT -->
-    <div id="addContactDiv" class="form-box">
-        <h2>Add Contact</h2>
-        <input type="text" id="firstName" placeholder="First Name" />
-        <input type="text" id="lastName" placeholder="Last Name" />
-        <input type="text" id="phone" placeholder="Phone" />
-        <input type="text" id="email" placeholder="Email" />
-        <button class="buttons" onclick="addContact();">Add Contact</button>
-        <p id="contactAddResult" class="result"></p>
+    <div class="section">
+        <div class="section-header">
+            <h2>Add Contact</h2>
+            <button id="toggleAddBtn" class="circle-btn" onclick="toggleAddAccordion()">+</button>
+        </div>
+        <div id="addContactAccordion" class="accordion hidden">
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="phone" placeholder="Phone">
+            <button class="button" onclick="addContact()">Add</button>
+            <p id="contactAddResult" class="result"></p>
+        </div>
     </div>
 
-    <hr>
+    <hr class="divider">
 
-    <!-- SEARCH CONTACTS -->
-    <div id="searchContactDiv" class="form-box">
-        <h2>Search Contacts</h2>
-      
-	<input type="text" id="searchText" placeholder="Search by First or Last Name" />
-        <button class="buttons" onclick="searchContacts();">Search</button>
-
-        <div id="contactSearchResult" class="contact-list"></div>
+    <!-- SEARCH -->
+    <div class="section">
+        <h2>Contact Search</h2>
+        <input type="text" id="searchInput" placeholder="Search by First or Last Name" oninput="searchContacts()">
     </div>
 
+    <!-- RESULTS -->
+    <div id="resultsContainer" class="results-container"></div>
+
+    <button class="logout-btn" onclick="doLogout();">Logout</button>
+
+    <script src="code.js"></script>
 </body>
 </html>
-

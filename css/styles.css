@@ -1,167 +1,154 @@
-/* ===============================
-   GLOBAL RESET & BASE
-================================ */
-* {
-    box-sizing: border-box;
-}
-
+/* Page background */
 body {
+    height: 100vh;
+    background-color: #DDF2FF;
     margin: 0;
-    font-family: 'Inter', 'Poppins', 'Ubuntu', system-ui, sans-serif;
-    background: #eeeeee;
-    color: #333;
-}
-
-/* ===============================
-   PAGE LAYOUT
-================================ */
-
-/* Default: center single-card pages (login / register) */
-body.center-page {
-    min-height: 100vh;
+    font-family: 'Cabin', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Contacts page: normal vertical flow */
-body.contacts-page {
-    padding: 40px 0;
-    display: block;
-}
-
-/* ===============================
-   CONTAINER
-================================ */
-.container {
-    background: #ffffff;
+/* Main wrapper */
+.page {
     width: 100%;
-    max-width: 480px;
-    margin: 0 auto 30px auto;
-    padding: 32px 36px;
-
-    border-radius: 14px;
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 1px 3px rgba(0, 0, 0, 0.04);
-
+    max-width: 900px;
     text-align: center;
 }
 
-/* Fix title alignment everywhere */
-.container h1 {
-    text-align: center;
-    margin: 0 0 24px 0;
+/* Title */
+h1 {
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+/* White container card */
+.card {
+    background-color: #FFFFFF;
+    width: 380px;
+    margin: 0 auto;
+    padding: 30px 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Card heading (Login / Register) */
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
-/* ===============================
-   FORMS & INPUTS
-================================ */
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"] {
+/* Inputs */
+input {
     width: 100%;
     padding: 12px 14px;
-    margin: 10px 0;
-
+    margin-bottom: 14px;
     border-radius: 10px;
-    border: 1px solid #d0d0d0;
-
+    border: 1px solid #ccc;
     font-size: 15px;
 }
 
-input:focus {
-    outline: none;
-    border-color: #6c8cff;
-    box-shadow: 0 0 0 3px rgba(108, 140, 255, 0.15);
+input::placeholder {
+    color: #aaa;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+/* Button */
 button {
     width: 100%;
-    margin-top: 14px;
-
-    background: linear-gradient(135deg, #6c8cff, #5a78ff);
-    color: #fff;
-
-    border: none;
     padding: 12px;
-    border-radius: 12px;
-
+    background-color: #82CFFF;
+    border: none;
+    border-radius: 24px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-top: 8px;
 }
 
 button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(90, 120, 255, 0.35);
+    background-color: #6bbef0;
 }
 
-button:active {
-    transform: translateY(0);
-    box-shadow: none;
+/* Small text links */
+.small-text {
+    font-size: 11px;
+    margin-top: 10px;
 }
 
-/* Small buttons inside contact list */
-.contact-list button {
-    width: auto;
-    padding: 6px 10px;
-    margin-left: 6px;
-    font-size: 13px;
-    border-radius: 8px;
+.small-text a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
 }
 
-/* ===============================
-   MESSAGES
-================================ */
-.message {
-    margin-top: 12px;
-    font-size: 14px;
+.small-text a:hover {
+    text-decoration: underline;
 }
 
-.message.error {
-    color: #e74c3c;
+
+/* CONTACTS PAGE */
+.contacts-page {
+    padding: 40px 60px;
 }
 
-.message.success {
-    color: #2ecc71;
+.section {
+    max-width: 900px;
 }
 
-/* ===============================
-   CONTACT LIST
-================================ */
-.contact-list {
-    margin-top: 20px;
-    text-align: left;
-    font-size: 14px;
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.contact-list div {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+h2 {
+    font-size: 26px;
+    margin: 10px 0;
 }
 
-/* Scroll if list gets long */
-.contact-list {
-    max-height: 300px;
-    overflow-y: auto;
+.circle-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    border: 1px solid #6bbcf5;
+    background-color: #7cc8f8;
+    font-size: 22px;
+    cursor: pointer;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-@media (max-width: 500px) {
-    .container {
-        padding: 24px;
-        border-radius: 10px;
-    }
+.divider {
+    border: none;
+    border-top: 3px solid #86ccff;
+    margin: 20px 0;
 }
 
+.contacts-page input {
+    width: 700px;
+    max-width: 100%;
+    padding: 12px 16px;
+    border-radius: 20px;
+    border: 1px solid #aaa;
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.save-btn {
+    margin-top: 8px;
+    padding: 8px 18px;
+    border-radius: 14px;
+    border: none;
+    background-color: #7cc8f8;
+    cursor: pointer;
+}
+
+.logout-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    border-radius: 14px;
+    border: 1px solid #6bbcf5;
+    background-color: #7cc8f8;
+    cursor: pointer;
+}
