@@ -94,61 +94,94 @@ button:hover {
 
 .section {
     max-width: 900px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .section-header {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-h2 {
-    font-size: 26px;
+.section h2 {
+    font-size: 22px;
     margin: 10px 0;
 }
 
+/* plus/minus button for add contacts */
 .circle-btn {
     width: 42px;
     height: 42px;
-    border-radius: 14px;
-    border: 1px solid #6bbcf5;
-    background-color: #7cc8f8;
+    border-radius: 12px;
     font-size: 22px;
-    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* divider line */
 .divider {
     border: none;
-    border-top: 3px solid #86ccff;
+    border-top: 3px solid #82CFFF;
     margin: 20px 0;
 }
 
+/* wider inputs only on contacts page */
 .contacts-page input {
     width: 700px;
     max-width: 100%;
-    padding: 12px 16px;
-    border-radius: 20px;
-    border: 1px solid #aaa;
-    margin: 8px 0;
+}
+
+/* hide accordion */
+.hidden {
+    display: none;
+}
+
+/* scrollable page */
+.results-container {
+    margin-top: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* individual contact row */
+.contact-item {
+    margin-bottom: 18px;
+}
+
+/* contact header row */
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+/* small icon buttons (edit/delete) */
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    padding: 0;
     font-size: 16px;
 }
 
-.save-btn {
+/* Edit accordion area */
+.edit-accordion {
     margin-top: 8px;
-    padding: 8px 18px;
-    border-radius: 14px;
-    border: none;
-    background-color: #7cc8f8;
-    cursor: pointer;
 }
 
+/* logout button w/ fixed pos */
 .logout-btn {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    border-radius: 14px;
-    border: 1px solid #6bbcf5;
-    background-color: #7cc8f8;
-    cursor: pointer;
+    top: 20px;
+    right: 30px;
+    width: auto;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
 }
+
