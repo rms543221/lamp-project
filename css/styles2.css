@@ -1,0 +1,85 @@
+/* Page background */
+body {
+    height: 100vh;
+    background-color: #DDF2FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main wrapper */
+.page {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+/* White container card */
+.card {
+    background-color: #FFFFFF;
+    width: 380px;
+    margin: 0 auto;
+    padding: 30px 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Card heading (Login / Register) */
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #82CFFF;
+    border: none;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:hover {
+    background-color: #6bbef0;
+}
+
+/* Small text links */
+.small-text {
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.small-text a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.small-text a:hover {
+    text-decoration: underline;
+}
