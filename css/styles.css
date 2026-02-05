@@ -161,7 +161,7 @@ button:hover {
 }
 
 /* small icon buttons (edit/delete) */
-.icon-btn {
+.icons {
     width: 36px;
     height: 36px;
     border-radius: 10px;
@@ -175,7 +175,7 @@ button:hover {
 }
 
 /* logout button w/ fixed pos */
-.logout-btn {
+.logout {
     position: fixed;
     top: 20px;
     right: 30px;

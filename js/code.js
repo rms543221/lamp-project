@@ -104,16 +104,16 @@ function addContact() {
 
 // ---------------- READ ----------------
 function searchContacts() {
-    let srch = document.getElementById("searchText").value.trim();
-
+    let input = document.getElementById("searchInput");
     // Do nothing if user hasn't entered a name
-    if (srch === "") {
+    if (input == null || input == "") {
         document.getElementById("contactSearchResult").innerHTML = "";
         lastSearch = "";
         return;
     }
 
-    lastSearch = srch;
+    input.value.trim();
+    lastSearch = input.value.trim();
 
     let tmp = { search: srch, userId };
     let xhr = new XMLHttpRequest();
@@ -172,7 +172,7 @@ function editContact(id) {
 
 // ---------------- DELETE ----------------
 function deleteContact(id) {
-    if (confirm("Delete this contact?")) {
+    if (confirm("Are you sure you want to delete this contact?")) {
         let tmp = { id, userId };
         let xhr = new XMLHttpRequest();
         xhr.open("POST", `${urlBase}/DeleteContact.${extension}`, true);
@@ -197,7 +197,7 @@ function toggleAddAccordion() {
 
     if (isHidden) {
         accordion.classList.remove("hidden");
-        btn.textContent = "−";
+        btn.textContent = "-";
     } else {
         closeAddAccordion();
     }
