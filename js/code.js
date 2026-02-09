@@ -103,17 +103,20 @@ function addContact() {
 }
 
 // ---------------- READ ----------------
-function searchContacts() {
+/*function searchContacts() {
     let input = document.getElementById("searchInput");
-    // Do nothing if user hasn't entered a name
-    if (input == null || input == "") {
+    if (!input) return; //exit on null error
+
+    let srch = input.value.trim();
+
+    //if no name, have no results
+    if (srch === "") {
         document.getElementById("contactSearchResult").innerHTML = "";
         lastSearch = "";
         return;
     }
 
-    input.value.trim();
-    lastSearch = input.value.trim();
+    lastSearch = srch;
 
     let tmp = { search: srch, userId };
     let xhr = new XMLHttpRequest();
@@ -142,6 +145,57 @@ function searchContacts() {
     };
 
     xhr.send(JSON.stringify(tmp));
+}*/
+
+
+function searchContacts()
+{
+	let srch = document.getElementById("searchInput").value;
+	document.getElementById("contactSearchResult").innerHTML = "";
+	
+	let contactList = "";
+
+	let tmp = {search:srch,userId:userId};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/SearchContacts.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				let jsonObject = JSON.parse( xhr.responseText );
+				
+            if (!jsonObject.results || jsonObject.results.length === 0) {
+                contactList = "No contacts found.";
+            } else {
+                jsonObject.results.forEach(c => {
+                    contactList += `
+                        ${c.FirstName} ${c.LastName} | ${c.Phone} | ${c.Email}
+                        <button onclick="showEdit(${c.ID})">Edit</button>
+                        <button onclick="deleteContact(${c.ID})">Delete</button><br>
+                        
+                        <div id="editAccordion-${c.ID}" class="accordion hidden"></div>
+                    `;
+                });
+            }
+				
+				document.getElementsByTagName("p")[0].innerHTML = contactList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+	
 }
 
 
@@ -189,7 +243,7 @@ function deleteContact(id) {
 }
 
 //contacts page add accordion
-function toggleAddAccordion() {
+/*function toggleAddAccordion() {
     const accordion = document.getElementById("addContactAccordion");
     const btn = document.getElementById("toggleAddBtn");
 
@@ -209,7 +263,58 @@ function closeAddAccordion() {
     document.getElementById("firstName").value = "";
     document.getElementById("lastName").value = "";
     document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+}*/
+
+function toggleAccordion(accordionId, buttonEl = null) {
+    const target = document.getElementById(accordionId);
+    if (!target) return;
+
+    const isOpening = target.classList.contains("hidden");
+
+    //close every open accordion
+    document.querySelectorAll(".accordion").forEach(acc => {
+        acc.classList.add("hidden");
+        //reset values 
+        document.getElementById("firstName").value = "";
+        document.getElementById("lastName").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("email").value = "";
+    });
+
+    //open accordion
+    if (isOpening) {
+        target.classList.remove("hidden");
+        //for add button, change text to -
+        if (buttonEl) buttonEl.textContent = "-";
+    }
+
 }
+
+//will insert values into edit contact accordion
+function showEdit(contactId, btn) {
+    const accId = `editAccordion-${contactId}`;
+    const acc = document.getElementById(accId);
+
+    //close accordions if already open
+    if (!acc.classList.contains("hidden")) {
+        toggleAccordion(accId);
+        return;
+    }
+
+    //load contact data
+    acc.innerHTML = `
+        <input id="editFirst-${contactId}" placeholder="First Name">
+        <input id="editLast-${contactId}" placeholder="Last Name">
+        <input id="editPhone-${contactId}" placeholder="Phone">
+        <input id="editEmail-${contactId}" placeholder="Email">
+        <button onclick="editContact(${contactId})">Save</button>
+    `;
+
+    toggleAccordion(accId, btn);
+}
+
+
 
 
 
