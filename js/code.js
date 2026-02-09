@@ -1,4 +1,4 @@
-const urlBase = "http://143.198.6.35/API";
+const urlBase = "https://miniapp4331.com/API";
 const extension = "php";
 
 let userId = 0;
@@ -280,6 +280,7 @@ function toggleAccordion(accordionId, buttonEl = null) {
         document.getElementById("lastName").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("email").value = "";
+        if (buttonEl) buttonEl.textContent = "+";
     });
 
     //open accordion
