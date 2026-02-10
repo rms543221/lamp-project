@@ -97,7 +97,7 @@ function addContact() {
     xhr.onreadystatechange = function() {
         if(this.readyState===4 && this.status === 200) {
             //success
-            document.getElementById("contactAddResult").innerHTML="Contact added";
+            document.getElementById("contactAddResult").innerHTML = c.firstName + " " + c.lastName + " added as a contact.";
 
             //close accordion
             toggleAccordion("addContactAccordion", document.getElementById("toggleAddBtn"));
@@ -113,7 +113,9 @@ function addContact() {
 function searchContacts()
 {
 	let srch = document.getElementById("searchInput").value;
-	document.getElementById("contactSearchResult").innerHTML = "";
+
+    //clear any add result when searching to avoid clutter
+    document.getElementById("contactAddResult").innerHTML
 
     //if nothing is typed, skip API
     if(srch === "") {

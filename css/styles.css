@@ -2,7 +2,6 @@
 body {
     height: 100vh;
     background-color: #DDF2FF;
-    margin: 0;
     font-family: 'Cabin', sans-serif;
     display: flex;
     justify-content: center;
@@ -47,6 +46,7 @@ input {
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 15px;
+    font-family: 'Cabin', sans-serif;
 }
 
 input::placeholder {
@@ -62,6 +62,7 @@ button {
     border-radius: 24px;
     font-size: 15px;
     font-weight: 600;
+    font-family: 'Cabin', sans-serif;
     cursor: pointer;
     margin-top: 8px;
 }
@@ -74,6 +75,7 @@ button:hover {
 .small-text {
     font-size: 11px;
     margin-top: 10px;
+    font-family: 'Cabin', sans-serif;
 }
 
 .small-text a {
@@ -85,7 +87,6 @@ button:hover {
 .small-text a:hover {
     text-decoration: underline;
 }
-
 
 /* CONTACTS PAGE */
 .contacts-page {
@@ -115,7 +116,7 @@ button:hover {
     height: 42px;
     border-radius: 12px;
     font-size: 22px;
-    padding: 0;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,28 +148,6 @@ button:hover {
     padding-right: 10px;
 }
 
-/* individual contact row */
-.contact-item {
-    margin-bottom: 18px;
-}
-
-/* contact header row */
-.contact-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-}
-
-/* small icon buttons (edit/delete) */
-.icons {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    padding: 0;
-    font-size: 16px;
-}
-
 /* Edit accordion area */
 .edit-accordion {
     margin-top: 8px;
@@ -184,4 +163,54 @@ button:hover {
     border-radius: 20px;
     font-size: 14px;
 }
+
+/* contact list styling */
+.contact-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.contact-name {
+    font-family: 'Cabin', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    display: block;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-details {
+    font-family: 'Cabin', sans-serif;
+    font-size: 18px;
+    color: #333;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* edit/delete button */
+.action-btn {
+    display: block;
+    padding: 8px 14px;
+    background-color: #82CFFF;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+}
+
+.action-btn:hover {
+    background-color: #6bbef0;
+}
+
 
