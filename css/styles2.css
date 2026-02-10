@@ -189,20 +189,28 @@ button:hover {
 /* contact list styling */
 .contact-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 10px 0;
+    gap: 15px;
+    margin: 10px 0;
 }
 
 .contact-name {
-    font-weight: 700;
-    font-size: 18px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
     display: block;
 }
 
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .contact-details {
-    font-size: 14px;
-    color: #555;
+    font-family: 'Cabin', sans-serif;
+    font-size: 18px;
+    color: #333;
 }
 
 .contact-actions {

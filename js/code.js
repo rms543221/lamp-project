@@ -102,51 +102,6 @@ function addContact() {
     xhr.send(JSON.stringify(tmp));
 }
 
-// ---------------- READ ----------------
-/*function searchContacts() {
-    let input = document.getElementById("searchInput");
-    if (!input) return; //exit on null error
-
-    let srch = input.value.trim();
-
-    //if no name, have no results
-    if (srch === "") {
-        document.getElementById("contactSearchResult").innerHTML = "";
-        lastSearch = "";
-        return;
-    }
-
-    lastSearch = srch;
-
-    let tmp = { search: srch, userId };
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", `${urlBase}/SearchContacts.${extension}`, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-    xhr.onreadystatechange = function () {
-        if (this.readyState === 4) {
-            let resp = JSON.parse(this.responseText);
-            let listHtml = "";
-
-            if (!resp.results || resp.results.length === 0) {
-                listHtml = "No contacts found.";
-            } else {
-                resp.results.forEach(c => {
-                    listHtml += `
-                        ${c.FirstName} ${c.LastName} | ${c.Phone} | ${c.Email}
-                        <button onclick="editContact(${c.ID})">Edit</button>
-                        <button onclick="deleteContact(${c.ID})">Delete</button><br>
-                    `;
-                });
-            }
-
-            document.getElementById("contactSearchResult").innerHTML = listHtml;
-        }
-    };
-
-    xhr.send(JSON.stringify(tmp));
-}*/
-
 
 function searchContacts()
 {
@@ -184,7 +139,7 @@ function searchContacts()
                             </div>
 
                             <div class="contact-actions">
-                                <button class="action-btn" onclick="showEdit(${c.ID}, this)">
+                                <button class="action-btn" onclick="showEdit(${c.ID, c}, this)">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
                                 <button class="action-btn" onclick="deleteContact(${c.ID})">
@@ -209,8 +164,29 @@ function searchContacts()
 	
 }
 
+//will insert values into edit contact accordion
+function showEdit(contact) {
+    const acc = document.getElementById(`editAccordion-${contact.ID}`);
 
-// ---------------- UPDATE ----------------
+    //close any open accordions
+    if (!acc.classList.contains("hidden")) {
+        acc.classList.add("hidden");
+        return;
+    }
+
+    //load contact data into fields
+    acc.innerHTML = `
+        <input id="editFirst-${contact.ID}" value="${contact.FirstName}">
+        <input id="editLast-${contact.ID}" value="${contact.LastName}">
+        <input id="editPhone-${contact.ID}" value="${contact.Phone}">
+        <input id="editEmail-${contact.ID}" value="${contact.Email}">
+        <button class="action-btn" onclick="saveEdit(${contact.ID})">Save</button>
+    `;
+
+    acc.classList.remove("hidden");
+}
+
+//update contacts
 function editContact(id) {
     let first = document.getElementById(`editFirst-${id}`).value.trim();
     let last  = document.getElementById(`editLast-${id}`).value.trim();
@@ -244,8 +220,7 @@ function editContact(id) {
 }
 
 
-
-// ---------------- DELETE ----------------
+//delete contacts
 function deleteContact(id) {
     if (confirm("Are you sure you want to delete this contact?")) {
         let tmp = { id, userId };
@@ -263,30 +238,7 @@ function deleteContact(id) {
     }
 }
 
-//contacts page add accordion
-/*function toggleAddAccordion() {
-    const accordion = document.getElementById("addContactAccordion");
-    const btn = document.getElementById("toggleAddBtn");
-
-    const isHidden = accordion.classList.contains("hidden");
-
-    if (isHidden) {
-        accordion.classList.remove("hidden");
-        btn.textContent = "-";
-    } else {
-        closeAddAccordion();
-    }
-}
-
-function closeAddAccordion() {
-    document.getElementById("addContactAccordion").classList.add("hidden");
-    document.getElementById("toggleAddBtn").textContent = "+";
-    document.getElementById("firstName").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("email").value = "";
-}*/
-
+//will toggle add/edit accordions
 function toggleAccordion(accordionId, buttonEl = null) {
     const target = document.getElementById(accordionId);
     if (!target) return;
@@ -311,28 +263,6 @@ function toggleAccordion(accordionId, buttonEl = null) {
         if (buttonEl) buttonEl.textContent = "-";
     }
 
-}
-
-//will insert values into edit contact accordion
-function showEdit(contactId, btn) {
-    const acc = document.getElementById(`editAccordion-${contactId}`);
-
-    //close any open accordions
-    if (!acc.classList.contains("hidden")) {
-        acc.classList.add("hidden");
-        return;
-    }
-
-    //load contact data into fields
-    acc.innerHTML = `
-        <input id="editFirst-${contactId}" value="${currentContact.FirstName}">
-        <input id="editLast-${contactId}" value="${currentContact.LastName}">
-        <input id="editPhone-${contactId}" value="${currentContact.Phone}">
-        <input id="editEmail-${contactId}" value="${currentContact.Email}">
-        <button onclick="saveEdit(${contactId})">Save</button>
-    `;
-
-    acc.classList.remove("hidden");
 }
 
 
