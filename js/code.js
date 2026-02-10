@@ -4,6 +4,7 @@ const extension = "php";
 let userId = 0;
 let firstName = "";
 let lastName = "";
+let contactMap = {};
 
 //login existing user
 function doLogin() {
@@ -142,6 +143,7 @@ function searchContacts()
                 contactList = "No contacts found.";
             } else {
                 jsonObject.results.forEach(c => {
+                    contactMap[c.ID] = c;
                     contactList += `
                         <div class="contact-row">
                             <div class="contact-info">
@@ -150,7 +152,7 @@ function searchContacts()
                             </div>
 
                             <div class="contact-actions">
-                                <button class="circle-btn" onclick="showEdit(${JSON.stringify(c)}, this)">
+                                <button class="circle-btn" onclick="showEdit(${c.ID}, this)">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
                                 <button class="circle-btn" onclick="deleteContact(${c.ID})">
@@ -176,8 +178,10 @@ function searchContacts()
 }
 
 //will insert values into edit contact accordion
-function showEdit(contact) {
-    const acc = document.getElementById(`editAccordion-${contact.ID}`);
+function showEdit(id) {
+    //grab contact info
+    const contact = contactMap[id];
+    const acc = document.getElementById(`editAccordion-${id}`);
 
     //close any open accordions
     if (!acc.classList.contains("hidden")) {
@@ -187,11 +191,11 @@ function showEdit(contact) {
 
     //load contact data into fields
     acc.innerHTML = `
-        <input id="editFirst-${contact.ID}" value="${contact.FirstName}">
-        <input id="editLast-${contact.ID}" value="${contact.LastName}">
-        <input id="editPhone-${contact.ID}" value="${contact.Phone}">
-        <input id="editEmail-${contact.ID}" value="${contact.Email}">
-        <button class="action-btn" onclick="saveEdit(${contact.ID})">Save</button>
+        <input id="editFirst-${id}" value="${contact.FirstName}">
+        <input id="editLast-${id}" value="${contact.LastName}">
+        <input id="editPhone-${id}" value="${contact.Phone}">
+        <input id="editEmail-${id}" value="${contact.Email}">
+        <button class="action-btn" onclick="saveEdit(${id})">Save</button>
     `;
 
     acc.classList.remove("hidden");
