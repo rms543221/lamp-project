@@ -5,7 +5,7 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-// ---------------- LOGIN ----------------
+//login existing user
 function doLogin() {
     let login = document.getElementById("loginName").value;
     let password = document.getElementById("loginPassword").value;
@@ -33,7 +33,7 @@ function doLogin() {
     xhr.send(JSON.stringify(tmp));
 }
 
-// ---------------- REGISTER ----------------
+//register new user to DB
 function doRegister() {
     let firstNameReg = document.getElementById("regFirstName").value;
     let lastNameReg = document.getElementById("regLastName").value;
@@ -55,7 +55,7 @@ function doRegister() {
     xhr.send(JSON.stringify(tmp));
 }
 
-// ---------------- COOKIE ----------------
+//cookies!
 function saveCookie() {
     let date = new Date();
     date.setTime(date.getTime() + 20*60*1000);
@@ -74,14 +74,14 @@ function readCookie() {
     if(userId<0) window.location.href="index.html";
 }
 
-// ---------------- LOGOUT ----------------
+//lose cookies, move to login page
 function doLogout() {
     userId=0; firstName=""; lastName="";
     document.cookie="firstName= ; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     window.location.href="index.html";
 }
 
-// ---------------- CREATE ----------------
+//add contact to DB
 function addContact() {
     let first=document.getElementById("firstName").value;
     let last=document.getElementById("lastName").value;
@@ -94,9 +94,15 @@ function addContact() {
     xhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
 
     xhr.onreadystatechange = function() {
-        if(this.readyState===4) {
+        if(this.readyState===4 && this.status === 200) {
+            //success
             document.getElementById("contactAddResult").innerHTML="Contact added";
-            searchContacts(); // refresh list
+
+            //close accordion
+            toggleAccordion("addContactAccordion", document.getElementById("toggleAddBtn"));
+
+            //refresh list
+            searchContacts();
         }
     };
     xhr.send(JSON.stringify(tmp));
@@ -144,7 +150,7 @@ function searchContacts()
                             </div>
 
                             <div class="contact-actions">
-                                <button class="circle-btn" onclick="showEdit(${c.ID, c}, this)">
+                                <button class="circle-btn" onclick="showEdit(${JSON.stringify(c)}, this)">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
                                 <button class="circle-btn" onclick="deleteContact(${c.ID})">
