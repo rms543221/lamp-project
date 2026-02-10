@@ -195,7 +195,7 @@ function showEdit(id) {
         <input id="editLast-${id}" value="${contact.LastName}">
         <input id="editPhone-${id}" value="${contact.Phone}">
         <input id="editEmail-${id}" value="${contact.Email}">
-        <button class="action-btn" onclick="saveEdit(${id})">Save</button>
+        <button class="action-btn" onclick="editContact(${id})">Save</button>
     `;
 
     acc.classList.remove("hidden");

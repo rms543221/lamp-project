@@ -116,7 +116,7 @@ button:hover {
     height: 42px;
     border-radius: 12px;
     font-size: 22px;
-    padding: 0;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -198,6 +198,7 @@ button:hover {
 
 /* edit/delete button */
 .action-btn {
+    display: block;
     padding: 8px 14px;
     background-color: #82CFFF;
     border: none;
@@ -205,7 +206,7 @@ button:hover {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    width: auto; 
+    width: auto;
 }
 
 .action-btn:hover {
