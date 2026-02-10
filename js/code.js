@@ -18,7 +18,7 @@ function doLogin() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     xhr.onreadystatechange = function() {
-        if(this.readyState === 4) {
+        if(this.readyState === 4 && this.status === 200) {
             let resp = JSON.parse(this.responseText);
             if(resp.id > 0) {
                 userId = resp.id;
@@ -47,7 +47,7 @@ function doRegister() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     xhr.onreadystatechange = function() {
-        if(this.readyState === 4) {
+        if(this.readyState === 4 && this.status === 200) {
             let resp = JSON.parse(this.responseText);
             if(resp.id > 0) window.location.href = "index.html";
             else document.getElementById("registerResult").innerHTML = "Registration failed";
@@ -225,9 +225,8 @@ function editContact(id) {
             //close accordion
             document.getElementById(`editAccordion-${id}`).classList.add("hidden");
             
-            if(lastSearch !== "") {
-                searchContacts(); // refresh ONLY if user searched
-            }
+            //refresh contacts list
+            searchContacts();
         }
     };
 
@@ -244,8 +243,9 @@ function deleteContact(id) {
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
         xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && lastSearch !== "") {
-                searchContacts(); // refresh ONLY if user searched
+            if (this.readyState === 4 && this.status === 200) {
+                //refresh contacts list
+                searchContacts();
             }
         };
 
