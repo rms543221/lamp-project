@@ -148,28 +148,6 @@ button:hover {
     padding-right: 10px;
 }
 
-/* individual contact row */
-.contact-item {
-    margin-bottom: 18px;
-}
-
-/* contact header row */
-.contact-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-}
-
-/* small icon buttons (edit/delete) */
-.icons {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    padding: 0;
-    font-size: 16px;
-}
-
 /* Edit accordion area */
 .edit-accordion {
     margin-top: 8px;

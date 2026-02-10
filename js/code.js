@@ -107,6 +107,11 @@ function searchContacts()
 {
 	let srch = document.getElementById("searchInput").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
+
+    //if nothing is typed, skip API
+    if(srch === "") {
+        return;
+    }
 	
 	let contactList = "";
 
@@ -139,10 +144,10 @@ function searchContacts()
                             </div>
 
                             <div class="contact-actions">
-                                <button class="action-btn" onclick="showEdit(${c.ID, c}, this)">
+                                <button class="circle-btn" onclick="showEdit(${c.ID, c}, this)">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
-                                <button class="action-btn" onclick="deleteContact(${c.ID})">
+                                <button class="circle-btn" onclick="deleteContact(${c.ID})">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
