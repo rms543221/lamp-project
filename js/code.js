@@ -270,20 +270,29 @@ function toggleAccordion(accordionId, buttonEl = null) {
 
     //close every open accordion
     document.querySelectorAll(".accordion").forEach(acc => {
-        acc.classList.add("hidden");
-        //reset values 
-        document.getElementById("firstName").value = "";
-        document.getElementById("lastName").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("email").value = "";
-        if (buttonEl) buttonEl.textContent = "+";
+        if (acc !== target) {
+            acc.classList.add("hidden");
+
+            //reset values for add button
+            if(acc.id==="addContactAccordion") {
+                document.getElementById("firstName").value = "";
+                document.getElementById("lastName").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
+            }
+            if (buttonEl) buttonEl.textContent = "+";
+        }
     });
 
-    //open accordion
+    //toggle target accordion
     if (isOpening) {
         target.classList.remove("hidden");
         //for add button, change text to -
         if (buttonEl) buttonEl.textContent = "-";
+    }
+    else {
+        target.classList.add("hidden");
+        if (buttonEl) buttonEl.textContent = "+";
     }
 
 }
