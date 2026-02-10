@@ -185,7 +185,7 @@ function searchContacts()
                     `;
                 });
             }
-				document.getElementsById("contactSearchResult").innerHTML = contactList;
+				document.getElementById("contactSearchResult").innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
