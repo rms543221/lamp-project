@@ -169,7 +169,7 @@ function searchContacts()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) have been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
             if (!jsonObject.results || jsonObject.results.length === 0) {
@@ -185,8 +185,7 @@ function searchContacts()
                     `;
                 });
             }
-				
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
+				document.getElementsById("contactSearchResult").innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
