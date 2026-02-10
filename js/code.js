@@ -177,10 +177,22 @@ function searchContacts()
             } else {
                 jsonObject.results.forEach(c => {
                     contactList += `
-                        ${c.FirstName} ${c.LastName} | ${c.Phone} | ${c.Email}
-                        <button onclick="showEdit(${c.ID})">Edit</button>
-                        <button onclick="deleteContact(${c.ID})">Delete</button><br>
-                        
+                        <div class="contact-row">
+                            <div class="contact-info">
+                                <span class="contact-name">${c.FirstName} ${c.LastName}</span>
+                                <span class="contact-details">${c.Phone} | ${c.Email}</span>
+                            </div>
+
+                            <div class="contact-actions">
+                                <button class="action-btn" onclick="showEdit(${c.ID}, this)">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="action-btn" onclick="deleteContact(${c.ID})">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
                         <div id="editAccordion-${c.ID}" class="accordion hidden"></div>
                     `;
                 });
@@ -200,27 +212,37 @@ function searchContacts()
 
 // ---------------- UPDATE ----------------
 function editContact(id) {
-    let first = prompt("Enter first name:");
-    let last  = prompt("Enter last name:");
-    let phone = prompt("Enter phone:");
-    let email = prompt("Enter email:");
+    let first = document.getElementById(`editFirst-${id}`).value.trim();
+    let last  = document.getElementById(`editLast-${id}`).value.trim();
+    let phone = document.getElementById(`editPhone-${id}`).value.trim();
+    let email = document.getElementById(`editEmail-${id}`).value.trim();
 
-    if (first && last && phone && email) {
-        let tmp = { id, firstName: first, lastName: last, phone, email, userId };
+    //ensure that each field is filled in
+    if (!first || !last || !phone || !email) {
+        alert("All fields are required.");
+        return;
+    }
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", `${urlBase}/UpdateContact.${extension}`, true);
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    let tmp = { id, firstName: first, lastName: last, phone, email, userId };
 
-        xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && lastSearch !== "") {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", `${urlBase}/UpdateContact.${extension}`, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //close accordion
+            document.getElementById(`editAccordion-${id}`).classList.add("hidden");
+            
+            if(lastSearch !== "") {
                 searchContacts(); // refresh ONLY if user searched
             }
-        };
+        }
+    };
 
-        xhr.send(JSON.stringify(tmp));
-    }
+    xhr.send(JSON.stringify(tmp));
 }
+
 
 
 // ---------------- DELETE ----------------
@@ -293,26 +315,26 @@ function toggleAccordion(accordionId, buttonEl = null) {
 
 //will insert values into edit contact accordion
 function showEdit(contactId, btn) {
-    const accId = `editAccordion-${contactId}`;
-    const acc = document.getElementById(accId);
+    const acc = document.getElementById(`editAccordion-${contactId}`);
 
-    //close accordions if already open
+    //close any open accordions
     if (!acc.classList.contains("hidden")) {
-        toggleAccordion(accId);
+        acc.classList.add("hidden");
         return;
     }
 
-    //load contact data
+    //load contact data into fields
     acc.innerHTML = `
-        <input id="editFirst-${contactId}" placeholder="First Name">
-        <input id="editLast-${contactId}" placeholder="Last Name">
-        <input id="editPhone-${contactId}" placeholder="Phone">
-        <input id="editEmail-${contactId}" placeholder="Email">
-        <button onclick="editContact(${contactId})">Save</button>
+        <input id="editFirst-${contactId}" value="${currentContact.FirstName}">
+        <input id="editLast-${contactId}" value="${currentContact.LastName}">
+        <input id="editPhone-${contactId}" value="${currentContact.Phone}">
+        <input id="editEmail-${contactId}" value="${currentContact.Email}">
+        <button onclick="saveEdit(${contactId})">Save</button>
     `;
 
-    toggleAccordion(accId, btn);
+    acc.classList.remove("hidden");
 }
+
 
 
 

@@ -185,3 +185,45 @@ button:hover {
     border-radius: 20px;
     font-size: 14px;
 }
+
+/* contact list styling */
+.contact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.contact-name {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+}
+
+.contact-details {
+    font-size: 14px;
+    color: #555;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* edit/delete button */
+.action-btn {
+    padding: 8px 14px;
+    background-color: #82CFFF;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto; 
+}
+
+.action-btn:hover {
+    background-color: #6bbef0;
+}
+
+
