@@ -20,14 +20,17 @@ function doLogin() {
     xhr.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
             let resp = JSON.parse(this.responseText);
-            if(resp.id > 0) {
+            //check that the login is valid
+            if(resp.id <= 0 || login.trim() == "" || password.trim() == "") {
+                document.getElementById("loginResult").innerHTML = "Invalid credentials";
+            }
+            //fill in user info, move to contacts
+            else if(resp.id > 0) {
                 userId = resp.id;
                 firstName = resp.firstName;
                 lastName = resp.lastName;
                 saveCookie();
                 window.location.href = "contacts.html";
-            } else {
-                document.getElementById("loginResult").innerHTML = "Invalid credentials";
             }
         }
     };
@@ -97,7 +100,7 @@ function addContact() {
     xhr.onreadystatechange = function() {
         if(this.readyState===4 && this.status === 200) {
             //success
-            document.getElementById("contactAddResult").innerHTML = c.firstName + " " + c.lastName + " added as a contact.";
+            document.getElementById("contactAddResult").innerHTML = first + " " + last + " added as a contact.";
 
             //close accordion
             toggleAccordion("addContactAccordion", document.getElementById("toggleAddBtn"));
@@ -140,10 +143,12 @@ function searchContacts()
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) have been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
-				
+			
+            //check for invalid searches
             if (!jsonObject.results || jsonObject.results.length === 0) {
                 contactList = "No contacts found.";
             } else {
+                //contact container; messy, but works
                 jsonObject.results.forEach(c => {
                     contactMap[c.ID] = c;
                     contactList += `
