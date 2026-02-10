@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="/css/styles2.css">
+</head>
+<body class="contacts-page">
+
+  <div class="page">
+    <button class="logout" onclick="doLogout();">Logout</button>
+    <h1>Contact Manager</h1>
+
+    <!-- add contacts -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Add Contact</h2>
+            <button id="toggleAddBtn" class="circle-btn" onclick="toggleAccordion('addContactAccordion', this)">+</button>
+        </div>
+
+        <div id="addContactAccordion" class="accordion hidden">
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="phone" placeholder="Phone">
+            <input type="text" id="email" placeholder="Email">
+            <button onclick="addContact()">Add</button>
+            <div class="small-text" id="contactAddResult"></div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- search for contacts -->
+    <div class="section">
+        <h2>Contact Search</h2>
+        <input type="text" id="searchInput"
+               placeholder="Search by First or Last Name"
+               oninput="searchContacts()">
+    </div>
+
+    <!-- results -->
+    <span id="contactSearchResult"></span>
+
+  </div>
+
+  <script type="text/javascript" src="js/code.js"></script>
+</body>
+
+</html>

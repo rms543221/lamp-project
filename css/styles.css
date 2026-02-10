@@ -1,0 +1,187 @@
+/* Page background */
+body {
+    height: 100vh;
+    background-color: #DDF2FF;
+    margin: 0;
+    font-family: 'Cabin', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main wrapper */
+.page {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+/* White container card */
+.card {
+    background-color: #FFFFFF;
+    width: 380px;
+    margin: 0 auto;
+    padding: 30px 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Card heading (Login / Register) */
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #82CFFF;
+    border: none;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:hover {
+    background-color: #6bbef0;
+}
+
+/* Small text links */
+.small-text {
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.small-text a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.small-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* CONTACTS PAGE */
+.contacts-page {
+    padding: 40px 60px;
+}
+
+.section {
+    max-width: 900px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section h2 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+/* plus/minus button for add contacts */
+.circle-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 22px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* divider line */
+.divider {
+    border: none;
+    border-top: 3px solid #82CFFF;
+    margin: 20px 0;
+}
+
+/* wider inputs only on contacts page */
+.contacts-page input {
+    width: 700px;
+    max-width: 100%;
+}
+
+/* hide accordion */
+.hidden {
+    display: none;
+}
+
+/* scrollable page */
+.results-container {
+    margin-top: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* individual contact row */
+.contact-item {
+    margin-bottom: 18px;
+}
+
+/* contact header row */
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+/* small icon buttons (edit/delete) */
+.icons {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    padding: 0;
+    font-size: 16px;
+}
+
+/* Edit accordion area */
+.edit-accordion {
+    margin-top: 8px;
+}
+
+/* logout button w/ fixed pos */
+.logout {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    width: auto;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
