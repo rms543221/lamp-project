@@ -122,6 +122,7 @@ function searchContacts()
 
     //if nothing is typed, skip API
     if(srch === "") {
+        document.getElementById("contactSearchResult").innerHTML = "";
         return;
     }
 	

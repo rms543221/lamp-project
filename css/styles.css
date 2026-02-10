@@ -196,10 +196,11 @@ button:hover {
     gap: 8px;
 }
 
-/* edit/delete button */
+/* add/save buttons */
 .action-btn {
     display: block;
     padding: 8px 14px;
+    margin-bottom: 10px;
     background-color: #82CFFF;
     border: none;
     border-radius: 20px;
