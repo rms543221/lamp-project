@@ -1,0 +1,296 @@
+openapi: 3.0.0
+info:
+  title: Contact Manager API
+  description: LAMP stack API for managing user contacts
+  version: 1.0.0
+  contact:
+    name: API Support
+servers:
+  - url: http://165.227.78.91/API
+    description: Production server (Digital Ocean)
+  - url: http://localhost/API
+    description: Local development server
+
+paths:
+  /Register.php:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with login credentials
+      tags:
+        - User Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - login
+                - password
+                - firstName
+                - lastName
+              properties:
+                login:
+                  type: string
+                  example: "john_doe"
+                password:
+                  type: string
+                  example: "password123"
+                firstName:
+                  type: string
+                  example: "John"
+                lastName:
+                  type: string
+                  example: "Doe"
+      responses:
+        '200':
+          description: User registered successfully or registration failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: User ID (0 if registration failed or login exists)
+                    example: 5
+                  firstName:
+                    type: string
+                    example: "John"
+                  lastName:
+                    type: string
+                    example: "Doe"
+
+  /Login.php:
+    post:
+      summary: User login
+      description: Authenticates a user and returns their information
+      tags:
+        - User Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - login
+                - password
+              properties:
+                login:
+                  type: string
+                  example: "john_doe"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        '200':
+          description: Login result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: User ID (0 if login failed)
+                    example: 5
+                  firstName:
+                    type: string
+                    example: "John"
+                  lastName:
+                    type: string
+                    example: "Doe"
+
+  /AddContact.php:
+    post:
+      summary: Add a new contact
+      description: Creates a new contact for the authenticated user
+      tags:
+        - Contact Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+                - phone
+                - email
+                - userId
+              properties:
+                firstName:
+                  type: string
+                  example: "Jane"
+                lastName:
+                  type: string
+                  example: "Smith"
+                phone:
+                  type: string
+                  example: "555-1234"
+                email:
+                  type: string
+                  example: "jane@example.com"
+                userId:
+                  type: integer
+                  example: 5
+      responses:
+        '200':
+          description: Contact creation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  contactId:
+                    type: integer
+                    example: 42
+
+  /SearchContacts.php:
+    post:
+      summary: Search contacts
+      description: Searches user's contacts by first name or last name
+      tags:
+        - Contact Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - search
+                - userId
+              properties:
+                search:
+                  type: string
+                  description: Search term (searches first and last name)
+                  example: "Jane"
+                userId:
+                  type: integer
+                  example: 5
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ID:
+                          type: integer
+                          example: 42
+                        FirstName:
+                          type: string
+                          example: "Jane"
+                        LastName:
+                          type: string
+                          example: "Smith"
+                        Phone:
+                          type: string
+                          example: "555-1234"
+                        Email:
+                          type: string
+                          example: "jane@example.com"
+
+  /UpdateContact.php:
+    post:
+      summary: Update a contact
+      description: Updates an existing contact (only if it belongs to the user)
+      tags:
+        - Contact Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - firstName
+                - lastName
+                - phone
+                - email
+                - userId
+              properties:
+                id:
+                  type: integer
+                  description: Contact ID to update
+                  example: 42
+                firstName:
+                  type: string
+                  example: "Jane"
+                lastName:
+                  type: string
+                  example: "Smith"
+                phone:
+                  type: string
+                  example: "555-5678"
+                email:
+                  type: string
+                  example: "jane.smith@example.com"
+                userId:
+                  type: integer
+                  example: 5
+      responses:
+        '200':
+          description: Update result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+  /DeleteContact.php:
+    post:
+      summary: Delete a contact
+      description: Deletes a contact (only if it belongs to the user)
+      tags:
+        - Contact Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - userId
+              properties:
+                id:
+                  type: integer
+                  description: Contact ID to delete
+                  example: 42
+                userId:
+                  type: integer
+                  example: 5
+      responses:
+        '200':
+          description: Delete result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+tags:
+  - name: User Management
+    description: User registration and authentication
+  - name: Contact Management
+    description: CRUD operations for contacts
