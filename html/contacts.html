@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The contact manager for the Contacts Manager app. Contacts are easily found through the search, and you can add contacts by name, phone, and email, edit their data, and delete them."/>
+
+    <title>Contact Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- style sheet -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Font Awesome icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="js/code.js"></script>
+    <!-- cookie loading -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            readCookie();
+        }, false);
+    </script>
+    
+
+
+</head>
+<body class="contacts-page">
+<main role="main">
+  <div class="page">
+    <button class="logout" onclick="doLogout();">Logout</button>
+    <h1>Contact Manager</h1>
+
+    <!-- add contacts -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Add Contact</h2>
+            <button id="toggleAddBtn" class="circle-btn" onclick="toggleAccordion('addContactAccordion', this)">+</button>
+        </div>
+
+        <div id="addContactAccordion" class="accordion hidden">
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="phone" placeholder="Phone">
+            <input type="text" id="email" placeholder="Email">
+            <button class="action-btn" onclick="addContact()">Add</button>
+        </div>
+        <div class="small-text" id="contactAddResult"></div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- search for contacts -->
+    <div class="section">
+        <h2>Contact Search</h2>
+        <input type="text" id="searchInput"
+               placeholder="Search by First or Last Name"
+               oninput="searchContacts()">
+    </div>
+
+    <!-- results -->
+    <span id="contactSearchResult"></span>
+
+  </div>
+</main>
+</body>
+
+</html>
