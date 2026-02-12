@@ -60,25 +60,44 @@ function doRegister() {
 }
 
 //cookies!
-function saveCookie() {
-    let date = new Date();
-    date.setTime(date.getTime() + 20*60*1000);
-    document.cookie = `firstName=${firstName},lastName=${lastName},userId=${userId};expires=${date.toGMTString()}`;
+function saveCookie()
+{
+	let minutes = 20;
+	let date = new Date();
+	date.setTime(date.getTime()+(minutes*60*1000));	
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-function readCookie() {
-    let data = document.cookie.split(",");
-    userId = -1;
-    data.forEach(d => {
-        let [k,v] = d.trim().split("=");
-        if(k=="firstName") firstName=v;
-        if(k=="lastName") lastName=v;
-        if(k=="userId") userId=parseInt(v);
-    });
-    if(userId<0) window.location.href="index.html";
+function readCookie()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+	
+	if( userId < 0 )
+	{
+		window.location.href = "index.html";
+	}
 }
 
-//lose cookies, move to login page
+//move to login page
 function doLogout() {
     userId=0; firstName=""; lastName="";
     document.cookie="firstName= ; expires=Thu, 01 Jan 1970 00:00:00 GMT";
