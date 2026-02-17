@@ -1,0 +1,40 @@
+name: Simple CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:   # manual trigger button
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # PHP syntax check
+    - name: Check PHP syntax
+      run: |
+        for file in *.php; do
+          php -l "$file"
+        done
+
+    # HTML validation
+    - name: Check HTML files
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tidy
+        for file in *.html; do
+          tidy -errors -q "$file"
+        done
+
+    # JavaScript syntax check
+    - name: Check JavaScript syntax
+      run: |
+        for file in *.js; do
+          node --check "$file"
+        done
+
+   
