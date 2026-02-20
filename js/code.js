@@ -121,6 +121,12 @@ function addContact() {
             //success
             document.getElementById("contactAddResult").innerHTML = first + " " + last + " added as a contact.";
 
+            //empty fields
+            document.getElementById("firstName") = "";   
+            document.getElementById("lastName") = ""; 
+            document.getElementById("phone") = ""; 
+            document.getElementById("email") = "";          
+
             //close accordion
             toggleAccordion("addContactAccordion", document.getElementById("toggleAddBtn"));
 
