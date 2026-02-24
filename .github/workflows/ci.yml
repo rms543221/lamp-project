@@ -61,7 +61,7 @@ jobs:
       run: |
         sshpass -p "$DROPLET_PASSWORD" rsync -avz --delete \
           -e "ssh -o StrictHostKeyChecking=no" \
-          ./ root@143.198.6.35:/var/www/html
+          ./ root@143.198.6.35:~/lamp-project
 
    
       
