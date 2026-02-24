@@ -4,35 +4,64 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:   # manual trigger button
+  workflow_dispatch:
 
 jobs:
-  validate:
+  validate-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # PHP syntax check
-    - name: Check PHP syntax
+
+    # PHP syntax check 
+    # -------------------------
+    - name: Check PHP syntax (API)
       run: |
-        for file in *.php; do
-          php -l "$file"
+        for file in API/*.php; do
+          if [ -f "$file" ]; then
+            php -l "$file"
+          fi
         done
 
-    # HTML validation
-    - name: Check HTML files
+  
+    # JavaScript syntax check 
+    # -------------------------
+    - name: Check JavaScript syntax (js folder)
+      run: |
+        for file in js/*.js; do
+          if [ -f "$file" ]; then
+            node --check "$file"
+          fi
+        done
+
+   
+    # HTML validation 
+    # -------------------------
+    - name: Check HTML files (html folder)
       run: |
         sudo apt-get update
         sudo apt-get install -y tidy
-        for file in *.html; do
-          tidy -q "$file" || true
+        for file in html/*.html; do
+          if [ -f "$file" ]; then
+            tidy -q "$file" || true
+          fi
         done
 
-    # JavaScript syntax check
-    - name: Check JavaScript syntax
+    
+    # Deploy to DigitalOcean Droplet
+    # -------------------------
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+
+    - name: Deploy to Droplet
+      env:
+        DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
       run: |
-        for file in *.js; do
-          node --check "$file"
-        done 
+        sshpass -p "$DROPLET_PASSWORD" rsync -avz --delete \
+          -e "ssh -o StrictHostKeyChecking=no" \
+          ./ root@143.198.6.35:/var/www/html
+
+   
+      
